@@ -5,7 +5,6 @@ export const loadModels = () => {
 
   return Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-    faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
     faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
     faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
     faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL),
@@ -25,9 +24,14 @@ export const detectFaces = async (image) => {
 
   const faces = await faceapi
     .detectAllFaces(image, new faceapi.TinyFaceDetectorOptions({ inputSize: 320 }))
-    .withFaceLandmarks()
     .withFaceExpressions()
     .withAgeAndGender();
+
+  // Remove 'fearful' and 'disgusted' expressions from each face
+  faces.forEach((face) => {
+    delete face.expressions['fearful'];
+    delete face.expressions['disgusted'];
+  });
 
   return faceapi.resizeResults(faces, displaySize);
 };
@@ -41,19 +45,12 @@ export const drawResults = async (image, canvas, results, type) => {
     const resizedDetections = faceapi.resizeResults(results, displaySize);
 
     switch (type) {
-      case 'landmarks':
-        faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-        break;
-      case 'expressions':
-        faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
-        break;
       case 'box':
         faceapi.draw.drawDetections(canvas, resizedDetections);
         break;
       case 'boxLandmarks':
         faceapi.draw.drawDetections(canvas, resizedDetections);
         faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
-        faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
         break;
       default:
         break;

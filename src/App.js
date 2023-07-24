@@ -17,32 +17,14 @@ function App() {
     <div className="App">
       <header>
         <div className="App__header">
-          <h1>
-            <span>Emotion-Analysis</span>
-          </h1>
+          <img src='/favicon.ico' height={'100%'} alt='logo'></img>
+          <h3>Student Emotions Detector</h3>
           <div className="App__switcher">
-            <FontAwesomeIcon icon="camera" color={mode ? '#007c6c' : '#cccccc'} />
-            <Switch
-              onChange={() => setMode(!mode)}
-              uncheckedIcon={false}
-              checkedIcon={false}
-              checked={!mode}
-              className="App__switcher-switch"
-            />
-            <FontAwesomeIcon icon="video" color={!mode ? '#007c6c' : '#cccccc'} />
           </div>
         </div>
       </header>
       <Camera photoMode={mode} />
-      <p>
-        Made with{' '}
-        <span role="img" aria-label="heart-emoji">
-          ❤️
-        </span>{' '}
-        by Rishabh.
-      </p>
     </div>
   );
 }
-
 export default App;

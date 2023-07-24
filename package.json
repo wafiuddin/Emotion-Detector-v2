@@ -6,13 +6,22 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "apexcharts": "^3.41.0",
+    "chart.js": "^4.3.0",
     "classnames": "^2.2.6",
     "face-api.js": "^0.22.1",
+    "firebase": "^10.1.0",
     "react": "^16.8.6",
+    "react-apexcharts": "^1.4.1",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^16.8.6",
+    "react-media-recorder": "^1.6.6",
     "react-scripts": "3.0.1",
     "react-switch": "^5.0.0",
-    "react-webcam": "^1.1.1"
+    "react-vis": "^1.12.1",
+    "react-webcam": "^1.1.1",
+    "recharts": "^2.7.2",
+    "victory": "^36.6.11"
   },
   "scripts": {
     "start": "react-scripts start",

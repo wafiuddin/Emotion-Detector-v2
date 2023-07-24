@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, } from 'react';
 import classnames from 'classnames';
 
 import { detectFaces, drawResults } from '../../helpers/faceApi';
@@ -10,6 +10,7 @@ import Webcam from 'react-webcam';
 
 import './Camera.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useReactMediaRecorder } from "react-media-recorder";
 
 const Camera = ({ photoMode }) => {
   const camera = useRef();
@@ -55,6 +56,12 @@ const Camera = ({ photoMode }) => {
     setPhoto(imgSrc);
     setShowGallery(true);
   };
+  
+    useReactMediaRecorder({ video: cameraCanvas });
+
+  
+
+
   const reset = () => {
     setPhoto(undefined);
     setPhotos([]);
@@ -69,12 +76,9 @@ const Camera = ({ photoMode }) => {
 
   return (
     <div className="camera">
-      <p className="scroll_down">Scroll down for results ↓</p>
       <div className="camera__wrapper">
         <Webcam audio={false} ref={camera} width="100%" height="auto" />
         <canvas className={classnames('webcam-overlay', photoMode && 'webcam-overlay--hidden')} ref={cameraCanvas} />
-      </div>
-
       {photoMode ? (
         <>
           <div className="camera__button-container">
@@ -84,17 +88,26 @@ const Camera = ({ photoMode }) => {
             </Button>
             {photos.length > 0 && <Button onClick={reset}>Reset</Button>}
           </div>
-
           {photos.length > 0 && <Gallery photos={photos} selected={photo} show={showGallery} deleteImage={deleteImage} />}
         </>
       ) : (
         <>
+        <div>
+          {/* <div id='recStatus' className='rec'>{status}</div>
+          <Button onClick={start}>
+              Start
+            </Button><Button onClick={stop}>
+              Stop
+            </Button> */}
           <div className="results__container">
             <Results results={results} />
+          </div>
+          {/* <iframe src={mediaBlobUrl}></iframe> */}
           </div>
         </>
       )}
     </div>
+  </div>
   );
 };
 

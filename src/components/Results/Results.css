@@ -7,14 +7,20 @@
   margin-top: 1rem;
 }
 
-.results__emoji {
-  color: #3d9970;
-}
 
 .results__text {
   width: 300px;
 }
 
-.results__emoji svg {
-  margin-right: 0.75rem;
+.results{
+  background-color: transparent !important;
+}
+
+.warning-box {
+  background-color: red;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 20px;
+  align-items: center;
 }
